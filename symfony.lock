@@ -56,6 +56,24 @@
     "doctrine/orm": {
         "version": "v2.6.0"
     },
+    "eightpoints/guzzle-bundle": {
+        "version": "7.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "7.0",
+            "ref": "8be83603226d268ee8a93721b5bb77ec71d8d334"
+        }
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -65,11 +83,17 @@
     "ocramius/proxy-manager": {
         "version": "2.1.1"
     },
+    "pgrimaud/horaires-ratp-sdk": {
+        "version": "1.1.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.0.2"
@@ -123,6 +147,9 @@
         "version": "v4.0.3"
     },
     "symfony/event-dispatcher": {
+        "version": "v4.0.3"
+    },
+    "symfony/expression-language": {
         "version": "v4.0.3"
     },
     "symfony/filesystem": {

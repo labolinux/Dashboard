@@ -1,0 +1,11 @@
+eight_points_guzzle:
+    clients:
+        sncf.api:
+            base_url: "%env(ENDPOINT_TRANSILIEN)%"
+            options:
+                auth:
+                    - "%env(TOKEN_USERNAME)%"
+                    - "%env(TOKEN_PASSWORD)%"
+                timeout: 30
+                headers:
+                    User-Agent: "DashBoard Labo-Linux"

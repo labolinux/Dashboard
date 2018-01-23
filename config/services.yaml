@@ -1,7 +1,28 @@
-parameters:
-
 services:
     _defaults:
         autowire: true
         autoconfigure: true
-        public: false
+        public: true
+
+## SYSTEME
+    app.storage:
+        class: App\Storage
+        arguments:
+            - "@cache.app"
+## API
+    api.ratp:
+        class: Ratp\Api
+
+## SERVICES API
+    service.ratp:
+        class: App\Services\RatpService
+        arguments:
+            - "@api.ratp"
+            - "@app.storage"
+
+    service.sncf:
+        class: App\Services\SncfService
+        arguments:
+            - "@eight_points_guzzle.client.sncf.api"
+            - "@app.storage"
+            - "@doctrine.orm.entity_manager"
