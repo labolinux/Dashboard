@@ -25,6 +25,11 @@ Cloner le projet
 
 `yarn install`
 
+Si vous avez les TOKEN de la SNCF veillez les mettre dans les Constant  du fichier .env
+
+`TOKEN_USERNAME &&
+ TOKEN_PASSWORD`
+
 ## Configuration de la base de donnée
 
 Ouvrez le fichier .env et adaptez la configuration.
@@ -39,6 +44,14 @@ et
 
 `php bin/console doctrine:schema:update --force`
 
+Chargez les gares
+
+`bin/console populate:gare`
+
+si vous faites les modifications du CSS ou JS vue que le projet utilise web-pack, 
+lancez yarn 
+
+`yarn run encore dev --watch `
 
 ## Pour finir
 Lancez le serveur
@@ -46,3 +59,21 @@ Lancez le serveur
 `php bin/console server:run` 
 
 rendez vous depuis votre navigateur à l'url indiqué.
+
+
+## Url pour les API
+### SNCF
+`/api/missions/transilien/gare/{UIC}/depart`
+
+uic correspond au code de la gare que vous trouverez dans la documention de l'API
+
+### RATP
+`/api/missions/ratp/{code}/{station}/{sens}`
+
+exemple pour la ligne 13 à saint lazare
+
+code: 13
+
+station: saint-lazare
+
+sens: A, R ou * pour Allez-retour

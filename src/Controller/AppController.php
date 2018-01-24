@@ -23,4 +23,12 @@ class AppController extends Controller
         return $this->render('base.html.twig');
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @Route("/check")
+     */
+    public function versionAction()
+    {
+        return $this->json(['version' => $this->get('api.ratp')->getVersion()]);
+    }
 }

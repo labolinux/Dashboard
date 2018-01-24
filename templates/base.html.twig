@@ -2,14 +2,15 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Dashboard SUPINFO{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('static/css/app.css') }}">
         {% endblock %}
     </head>
     <body>
-    <h2>Dashboard</h2>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% include 'dashboard/dashboard.html.twig' %}
+        {% endblock %}
         {% block javascripts %}
             <script type="application/javascript" src="{{ asset('static/js/app.js') }}"></script>
         {% endblock %}

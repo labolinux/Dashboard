@@ -1,0 +1,3 @@
+parameters:
+    sncf_ttl: 120
+    ratp_ttl: 900
