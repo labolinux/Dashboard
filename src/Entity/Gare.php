@@ -38,13 +38,20 @@ class Gare
      * @var string
      * @ORM\Column
      */
-    private $code;
+    private $realName;
+
 
     /**
      * @var string
      * @ORM\Column
      */
-    private $realName;
+    private $arret;
+
+    /**
+     * @var string
+     * @ORM\Column
+     */
+    private $zone;
 
     /**
      * @var string
@@ -131,17 +138,33 @@ class Gare
     /**
      * @return string
      */
-    public function getCode(): string
+    public function getArret(): string
     {
-        return $this->code;
+        return $this->arret;
     }
 
     /**
-     * @param string $code
+     * @param string $arret
      */
-    public function setCode(string $code): void
+    public function setArret(string $arret): void
     {
-        $this->code = $code;
+        $this->arret = $arret;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZone(): string
+    {
+        return $this->zone;
+    }
+
+    /**
+     * @param string $zone
+     */
+    public function setZone(string $zone): void
+    {
+        $this->zone = $zone;
     }
 
 

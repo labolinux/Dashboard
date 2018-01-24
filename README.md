@@ -44,6 +44,10 @@ et
 
 `php bin/console doctrine:schema:update --force`
 
+Chargez les gares
+
+`bin/console populate:gare`
+
 si vous faites les modifications du CSS ou JS vue que le projet utilise web-pack, 
 lancez yarn 
 

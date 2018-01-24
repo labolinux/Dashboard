@@ -9,6 +9,11 @@ services:
         class: App\Storage
         arguments:
             - "@cache.app"
+
+    populate.command:
+        class: App\Command\PopulateCommand
+        tags:
+            - { name: "console.command" }
 ## API
     api.ratp:
         class: Ratp\Api
