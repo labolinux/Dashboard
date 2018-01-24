@@ -28,16 +28,18 @@ class MissionController extends Controller
      * @param $station
      * @param $sens
      *
-     * @return JsonResponse
-     * @Route("/ratp/{code}/{station}/{sens}", name="depart_ratp")
+     * @param string $type
      *
+     * @return JsonResponse
+     * @Route("/ratp/{code}/{station}/{sens}/{type}", name="depart_ratp")
      */
-    public function missionsAction(Request $request, $code, $station, $sens)
+    public function missionsAction(Request $request, $code, $station, $sens, $type = "metros")
     {
         $params = [
             'code' => $code,
             'station' => $station,
-            'sens' => $sens
+            'sens' => $sens,
+            'type' => $type
         ];
 
         $missions = $this->get('service.ratp')->geMissionNext($params);

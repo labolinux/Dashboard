@@ -8,14 +8,18 @@
 
 namespace App\Helper;
 
-use Psr\Http\Message\ResponseInterface;
-
 class ResponseHelper
 {
 
-    public static function formatResponse(ResponseInterface $response)
+    /**
+     * @param mixed $response
+     *
+     * @return array
+     */
+    public static function formatResponse($response)
     {
-        $jsonArray = json_decode($response->getBody(), JSON_OBJECT_AS_ARRAY);
+        $jsonArray = json_decode($response, JSON_OBJECT_AS_ARRAY);
+
         return self::toArray($jsonArray);
     }
 

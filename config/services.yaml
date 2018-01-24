@@ -24,6 +24,7 @@ services:
         arguments:
             - "@api.ratp"
             - "@app.storage"
+            - "%env(EXTERNAL_API)%"
 
     service.sncf:
         class: App\Services\SncfService

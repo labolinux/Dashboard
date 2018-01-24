@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Builder\MissionNextBuilder;
+use App\Helper\ResponseHelper;
 use App\Storage;
 use Ratp\Api;
 use Ratp\Line;
@@ -31,15 +32,22 @@ class RatpService
     private $storage;
 
     /**
+     * @var string
+     */
+    private $externalEndpoint;
+
+    /**
      * RatpService constructor.
      *
      * @param Api $api
      * @param Storage $storage
+     * @param $externalEndpoint
      */
-    public function __construct(Api $api, Storage $storage)
+    public function __construct(Api $api, Storage $storage, $externalEndpoint)
     {
         $this->api = $api;
         $this->storage = $storage;
+        $this->externalEndpoint = $externalEndpoint;
     }
 
     /**
@@ -49,6 +57,11 @@ class RatpService
      */
     public function geMissionNext(array $parameters)
     {
+
+        if (null != $this->externalEndpoint) {
+            return $this->callExternalApi($parameters);
+        }
+
         $missions = [];
 
         $results = $this->getFromCache("getMissionsNext", MissionNextBuilder::build($parameters), "ratp.next_missions");
@@ -57,16 +70,36 @@ class RatpService
         foreach ($results->getReturn()->getMissions() as $item) {
 
             $mission[] = [
-                'direction' => $this->getTerminus($item->getStations()),
+                'destination' => $this->getTerminus($item->getStations()),
                 'message' => $this->getStationMessage($item->getStationsMessages())
             ];
 
-            $missions['missions'] = $mission;
+            $missions['schedules'] = $mission;
         }
 
         $missions['_info'] = $this->getInfosStation($results->getReturn()->getArgumentLine());
 
-        return $missions;
+        return ['result' => $missions];
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return array
+     */
+    public function callExternalApi(array $parameters)
+    {
+        $url = $this->externalEndpoint . sprintf("/schedules/%s/%s/%s/%s", $parameters["type"], $parameters["code"], $parameters["station"], $parameters["sens"]);
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $url,
+            CURLOPT_USERAGENT => 'Dashboard SUPINFO'
+        ));
+        $resp = curl_exec($curl);
+        curl_close($curl);
+        return ResponseHelper::formatResponse($resp);
     }
 
     /**
