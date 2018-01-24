@@ -23,15 +23,15 @@ class MissionNextBuilder
      */
     public static function build(array $parameters = [])
     {
+        $prefix = $parameters["type"][0];
         $line = new Line();
-        $line->setId("M".$parameters["code"]);
+        $line->setId(strtoupper($prefix).$parameters["code"]);
         $station = new Station();
         $station->setName($parameters["station"]);
         $station->setLine($line);
         $direction = new Direction();
         $direction->setSens($parameters["sens"]);
         $missionNext = new MissionsNext($station, $direction);
-
         return $missionNext;
     }
 

@@ -51,7 +51,7 @@ class SncfService
     public function getNextTrains($code)
     {
         $url = "/gare/" . $code . "/depart/";
-        $data = $this->getFromCache($url, "sncf.next_transilien");
+        $data = $this->getFromCache($url, "sncf.next_transilien_");
 
         return $data;
     }

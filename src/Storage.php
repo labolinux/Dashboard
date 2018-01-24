@@ -28,7 +28,7 @@ class Storage
     public function setItem(CacheItem $item, $data)
     {
         $item->set(serialize($data));
-        $item->expiresAt(new \DateTime('tomorrow'));
+        $item->expiresAt(new \DateTime('+1 minute'));
         $this->cache->save($item);
     }
 
